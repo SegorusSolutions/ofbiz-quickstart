@@ -1,0 +1,327 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* End of reset.css */
+
+:root {
+    font-family: sans-serif;
+    background: #ffffff;
+    --card-bg-color: #f2f2f2;
+    --card-border-color: #c3c3c3;
+
+    --font-primary: "DM Sans", "DM Sans Fallback: BlinkMacSystemFont", "DM Sans Fallback: Segoe UI", "DM Sans Fallback: Helvetica Neue", "DM Sans Fallback: Arial", "DM Sans Fallback: Noto Sans", sans-serif;
+    --font-secondary: "DM Sans", "DM Sans Fallback: BlinkMacSystemFont", "DM Sans Fallback: Segoe UI", "DM Sans Fallback: Helvetica Neue", "DM Sans Fallback: Arial", "DM Sans Fallback: Noto Sans", sans-serif;
+    --font-code: "DM Mono", "DM Mono Fallback: Courier New", "DM Mono Fallback: Roboto Mono", "DM Mono Fallback: Noto Sans Mono", monospace;
+
+    line-height: 1.15;
+}
+
+header {
+    height: 80px;
+    background: #f2f2f2;
+    padding: 2rem;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+main {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+h1 {
+    padding: 1rem;
+    margin: 0;
+}
+
+.nav-bar {
+    display: flex;
+    gap: .5rem;
+    padding: .5rem;
+}
+
+.step {
+    --bean-color: #129c7c;
+    background-color: var(--bean-color);
+    --chevron-width: 1rem;
+}
+
+.step.selected {
+    --bean-color: #125e9c;
+}
+
+.step.attention {
+    --bean-color: #125e9c; /*#a3a3a3;*/
+}
+
+.step svg {
+    width: 1lh;
+    height: 1lh;
+}
+
+.step a {
+    text-decoration: none;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: calc(var(--chevron-width) - .5lh) var(--chevron-width) calc(var(--chevron-width) - .5lh) calc(var(--chevron-width) * 2);
+    color: #ffffff;
+}
+
+.step a:after {
+    content: "";
+    border-top: var(--chevron-width) solid transparent;
+    border-bottom: var(--chevron-width) solid transparent;
+    border-left: var(--chevron-width) solid var(--bean-color);
+    position: absolute;
+    right: calc(var(--chevron-width) * -1);
+    top: 0;
+    z-index: 1;
+}
+
+.step a:before {
+    content: "";
+    border-top: var(--chevron-width) solid transparent;
+    border-bottom: var(--chevron-width) solid transparent;
+    border-left: var(--chevron-width) solid white;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.step:first-child {
+    border-radius: .5rem 0 0 .5rem;
+}
+
+.step:last-child {
+    border-radius: 0 .5rem .5rem 0;
+}
+
+.step:last-child a:after {
+    display: none;
+}
+
+.step:first-child a:before {
+    display: none;
+}
+
+.step:last-child a:after {
+    display: none;
+}
+
+.status-box {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+.status-item {
+    border-radius: .5rem;
+    background-color: #e6e6e6;
+    border: solid 1px #cccccc;
+    overflow: hidden;
+}
+.status-item-header {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .5rem;
+}
+.status-item-details {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin-left: 2rem;
+    padding: .5rem;
+    background: #fafafa;
+    border-top-left-radius: .5rem;
+    border-bottom-right-radius: .5rem;
+}
+.status-progress-bar {
+    background-color: #aaaaaa;
+    height:4px;
+}
+.status-progress-bar-value {
+    height: 100%;
+    background-color: royalblue;
+}
+.status-progress-bar-value.unknown {
+    width: 100%;
+    animation: indeterminateAnimation 1s infinite linear;
+    transform-origin: 0% 50%;
+}
+@keyframes indeterminateAnimation {
+    0% {
+        transform:  translateX(0) scaleX(0);
+    }
+    40% {
+        transform:  translateX(0) scaleX(0.4);
+    }
+    100% {
+        transform:  translateX(100%) scaleX(0.5);
+    }
+}
+
+.card-option {
+    padding: 1.25rem;
+    display: flex;
+    align-items: stretch;
+    gap: 1.25rem;
+    background-color: #f2f2f2;
+    border-radius: 1rem;
+    border: none;
+    text-align: left;
+    font-size: 1rem;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+.card-option:hover {
+    background-color: #f9f9f9;
+}
+
+.card-info {
+    padding: 1.25rem;
+    display: flex;
+    align-items: stretch;
+    gap: 1.25rem;
+    border: 3px dashed #f2f2f2;
+    border-radius: 1rem;
+    text-align: left;
+    font-size: 1rem;
+    text-decoration: none;
+    color: black;
+}
+
+.card-option-icon {
+    padding: .5rem;
+    display: flex;
+    flex-shrink: 0;
+    flex-grow: 0;
+    align-self: start;
+    gap: .5rem;
+    background-color: #129c7c;
+    border-radius: .5rem;
+    color: white;
+}
+
+.card-option:disabled .card-option-icon {
+    background-color: #a3a3a3;
+}
+
+.card-option-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: .5rem;
+}
+
+.card-option:disabled .card-option-body {
+    color: #a3a3a3;
+}
+
+.card-option-title {
+    font-weight: 800;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-option:disabled .card-option-title {
+    color: #a3a3a3;
+}
+
+.card-option-container {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.item-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    border-radius: .5rem;
+    padding: .5rem;
+    background-color: var(--card-bg-color);
+    border: solid 1px var(--card-border-color);
+    gap: .5rem;
+}
+
+.card-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.card-content {
+    display: flex;
+}
+
+section {
+    padding: .75rem;
+}
+
+section h2 {
+    font-weight: bold;
+    font-family: var(--font-secondary);
+    margin-bottom: .5rem;
+}
+
+.form-group {
+    padding: .5rem;
+}
+
+label {
+    display: block;
+}
