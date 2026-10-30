@@ -32,6 +32,12 @@ class PluginsSetupController {
     @PostMapping()
     RedirectView setupPluginsPost()
     {
+        PluginsSetupStep pluginSetupStep = wizard.getStep(PluginsSetupStep.class)
+
+        PluginsSetupConfig config = new PluginsSetupConfig()
+
+        pluginSetupStep.setConfig(config)
+
         return new RedirectView("/setup/config/database")
     }
 

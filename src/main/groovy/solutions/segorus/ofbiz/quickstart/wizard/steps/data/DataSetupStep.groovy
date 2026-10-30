@@ -19,9 +19,4 @@ class DataSetupStep extends WizardStep<DataSetupConfig> {
     String getPath() {
         return "/setup/config/data"
     }
-
-    @Override
-    boolean isReady() {
-        return false
-    }
 }

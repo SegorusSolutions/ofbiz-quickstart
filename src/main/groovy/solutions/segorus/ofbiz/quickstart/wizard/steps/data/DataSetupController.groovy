@@ -32,6 +32,12 @@ class DataSetupController {
     @PostMapping()
     RedirectView setupDataPost()
     {
+        DataSetupStep dataSetupStep = wizard.getStep(DataSetupStep.class)
+
+        DataSetupConfig config = new DataSetupConfig()
+
+        dataSetupStep.setConfig(config)
+
         return new RedirectView("/setup/config/user")
     }
 }
