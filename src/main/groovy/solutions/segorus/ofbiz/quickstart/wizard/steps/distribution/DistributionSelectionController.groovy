@@ -26,6 +26,13 @@ class DistributionSelectionController {
     {
         model.put("steps", wizard.getSteps())
         model.put("currentStep", "/setup/config/distribution")
+        model.put("distributions", [
+                [
+                        "id": 1,
+                        "name": "Apache OBbiz",
+                        "version": "OFBIZ-12401"
+                ]
+        ])
         return "pages/setup/config/distribution"
     }
 
