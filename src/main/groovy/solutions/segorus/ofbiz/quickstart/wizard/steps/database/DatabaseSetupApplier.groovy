@@ -43,154 +43,157 @@ class DatabaseSetupApplier implements WizardStepApplier<DatabaseSetupConfig> {
             details = "Setting up database"
         }
 
-        DatabaseSetupPostgresConfig pgconfig = config
-        JsonBuilder builder = new JsonBuilder()
+        if (config.class == DatabaseSetupPostgresConfig)
+        {
+            DatabaseSetupPostgresConfig pgconfig = config
+            JsonBuilder builder = new JsonBuilder()
 
-        builder([
-            "entityengine": [
-                "entity-config": [
-                    "delegator": [
-                        "default":[
-                            "entity-model-reader": "main",
-                            "entity-group-reader": "main",
-                            "entity-eca-reader": "main",
-                            "distributed-cache-enabled": "true",
-                            "group-map": [
-                                "org.apache.ofbiz": [
-                                    "datasource-name": "localpostgres"
-                                ],
-                                "org.apache.ofbiz.olap": [
-                                    "datasource-name": "localpostgresolap"
-                                ],
-                                "org.apache.ofbiz.tenant": [
-                                    "datasource-name": "localpostgrestenant"
-                                ]
+            builder([
+                    "entityengine": [
+                            "entity-config": [
+                                    "delegator": [
+                                            "default":[
+                                                    "entity-model-reader": "main",
+                                                    "entity-group-reader": "main",
+                                                    "entity-eca-reader": "main",
+                                                    "distributed-cache-enabled": "true",
+                                                    "group-map": [
+                                                            "org.apache.ofbiz": [
+                                                                    "datasource-name": "localpostgres"
+                                                            ],
+                                                            "org.apache.ofbiz.olap": [
+                                                                    "datasource-name": "localpostgresolap"
+                                                            ],
+                                                            "org.apache.ofbiz.tenant": [
+                                                                    "datasource-name": "localpostgrestenant"
+                                                            ]
+                                                    ]
+                                            ],
+                                    ],
+                                    "datasource": [
+                                            "localpostgres": [
+                                                    "helper-class": "org.apache.ofbiz.entity.datasource.GenericHelperDAO",
+                                                    "schema-name": "ofbiz",
+                                                    "field-type-name": "postgres",
+                                                    "check-on-start": "true",
+                                                    "add-missing-on-start": "true",
+                                                    "use-fk-initially-deferred": "false",
+                                                    "alias-view-columns": "false",
+                                                    "join-style": "ansi",
+                                                    "use-binary-type-for-blob": "true",
+                                                    "use-order-by-nulls": "true",
+                                                    "offset-style": "limit",
+                                                    "result-fetch-size": "50",
+                                                    "read-data": [
+                                                            ["reader-name": "tenant"],
+                                                            ["reader-name": "seed"],
+                                                            ["reader-name": "seed-initial"],
+                                                            ["reader-name": "demo"],
+                                                            ["reader-name": "ext"],
+                                                            ["reader-name": "ext-test"],
+                                                            ["reader-name": "ext-demo"]
+                                                    ],
+                                                    "inline-jdbc": [
+                                                            "jdbc-driver": "org.postgresql.Driver",
+                                                            "jdbc-uri": "jdbc:postgresql://" + pgconfig.getHostname() + "/" + pgconfig.getDatabase(),
+                                                            "jdbc-username": pgconfig.getUsername(),
+                                                            "jdbc-password": pgconfig.getPassword(),
+                                                            "isolation-level": "ReadCommitted",
+                                                            "pool-minsize": "2",
+                                                            "pool-maxsize": "250",
+                                                            "time-between-eviction-runs-millis": "600000"
+                                                    ]
+                                            ],
+                                            "localpostgresolap": [
+                                                    "helper-class": "org.apache.ofbiz.entity.datasource.GenericHelperDAO",
+                                                    "schema-name": "ofbiz_olap",
+                                                    "field-type-name": "postgres",
+                                                    "check-on-start": "true",
+                                                    "add-missing-on-start": "true",
+                                                    "use-fk-initially-deferred": "false",
+                                                    "alias-view-columns": "false",
+                                                    "join-style": "ansi",
+                                                    "use-binary-type-for-blob": "true",
+                                                    "use-order-by-nulls": "true",
+                                                    "offset-style": "limit",
+                                                    "result-fetch-size": "50",
+                                                    "read-data": [
+                                                            ["reader-name": "tenant"],
+                                                            ["reader-name": "seed"],
+                                                            ["reader-name": "seed-initial"],
+                                                            ["reader-name": "demo"],
+                                                            ["reader-name": "ext"],
+                                                            ["reader-name": "ext-test"],
+                                                            ["reader-name": "ext-demo"]
+                                                    ],
+                                                    "inline-jdbc": [
+                                                            "jdbc-driver": "org.postgresql.Driver",
+                                                            "jdbc-uri": "jdbc:postgresql://" + pgconfig.getHostname() + "/" + pgconfig.getDatabase(),
+                                                            "jdbc-username": pgconfig.getUsername(),
+                                                            "jdbc-password": pgconfig.getPassword(),
+                                                            "isolation-level": "ReadCommitted",
+                                                            "pool-minsize": "2",
+                                                            "pool-maxsize": "250",
+                                                            "time-between-eviction-runs-millis": "600000"
+                                                    ]
+                                            ],
+                                            "localpostgrestenant": [
+                                                    "helper-class": "org.apache.ofbiz.entity.datasource.GenericHelperDAO",
+                                                    "schema-name": "ofbiz_tenant",
+                                                    "field-type-name": "postgres",
+                                                    "check-on-start": "true",
+                                                    "add-missing-on-start": "true",
+                                                    "use-fk-initially-deferred": "false",
+                                                    "alias-view-columns": "false",
+                                                    "join-style": "ansi",
+                                                    "use-binary-type-for-blob": "true",
+                                                    "use-order-by-nulls": "true",
+                                                    "offset-style": "limit",
+                                                    "result-fetch-size": "50",
+                                                    "read-data": [
+                                                            ["reader-name": "tenant"],
+                                                            ["reader-name": "seed"],
+                                                            ["reader-name": "seed-initial"],
+                                                            ["reader-name": "demo"],
+                                                            ["reader-name": "ext"],
+                                                            ["reader-name": "ext-test"],
+                                                            ["reader-name": "ext-demo"]
+                                                    ],
+                                                    "inline-jdbc": [
+                                                            "jdbc-driver": "org.postgresql.Driver",
+                                                            "jdbc-uri": "jdbc:postgresql://" + pgconfig.getHostname() + "/" + pgconfig.getDatabase(),
+                                                            "jdbc-username": pgconfig.getUsername(),
+                                                            "jdbc-password": pgconfig.getPassword(),
+                                                            "isolation-level": "ReadCommitted",
+                                                            "pool-minsize": "2",
+                                                            "pool-maxsize": "250",
+                                                            "time-between-eviction-runs-millis": "600000"
+                                                    ]
+                                            ]
+                                    ]
                             ]
-                        ],
-                    ],
-                    "datasource": [
-                        "localpostgres": [
-                            "helper-class": "org.apache.ofbiz.entity.datasource.GenericHelperDAO",
-                            "schema-name": "ofbiz",
-                            "field-type-name": "postgres",
-                            "check-on-start": "true",
-                            "add-missing-on-start": "true",
-                            "use-fk-initially-deferred": "false",
-                            "alias-view-columns": "false",
-                            "join-style": "ansi",
-                            "use-binary-type-for-blob": "true",
-                            "use-order-by-nulls": "true",
-                            "offset-style": "limit",
-                            "result-fetch-size": "50",
-                            "read-data": [
-                                ["reader-name": "tenant"],
-                                ["reader-name": "seed"],
-                                ["reader-name": "seed-initial"],
-                                ["reader-name": "demo"],
-                                ["reader-name": "ext"],
-                                ["reader-name": "ext-test"],
-                                ["reader-name": "ext-demo"]
-                            ],
-                            "inline-jdbc": [
-                                "jdbc-driver": "org.postgresql.Driver",
-                                "jdbc-uri": "jdbc:postgresql://" + pgconfig.getHostname() + "/" + pgconfig.getDatabase(),
-                                "jdbc-username": pgconfig.getUsername(),
-                                "jdbc-password": pgconfig.getPassword(),
-                                "isolation-level": "ReadCommitted",
-                                "pool-minsize": "2",
-                                "pool-maxsize": "250",
-                                "time-between-eviction-runs-millis": "600000"
-                            ]
-                        ],
-                        "localpostgresolap": [
-                            "helper-class": "org.apache.ofbiz.entity.datasource.GenericHelperDAO",
-                            "schema-name": "ofbiz_olap",
-                            "field-type-name": "postgres",
-                            "check-on-start": "true",
-                            "add-missing-on-start": "true",
-                            "use-fk-initially-deferred": "false",
-                            "alias-view-columns": "false",
-                            "join-style": "ansi",
-                            "use-binary-type-for-blob": "true",
-                            "use-order-by-nulls": "true",
-                            "offset-style": "limit",
-                            "result-fetch-size": "50",
-                            "read-data": [
-                                ["reader-name": "tenant"],
-                                ["reader-name": "seed"],
-                                ["reader-name": "seed-initial"],
-                                ["reader-name": "demo"],
-                                ["reader-name": "ext"],
-                                ["reader-name": "ext-test"],
-                                ["reader-name": "ext-demo"]
-                            ],
-                            "inline-jdbc": [
-                                "jdbc-driver": "org.postgresql.Driver",
-                                "jdbc-uri": "jdbc:postgresql://" + pgconfig.getHostname() + "/" + pgconfig.getDatabase(),
-                                "jdbc-username": pgconfig.getUsername(),
-                                "jdbc-password": pgconfig.getPassword(),
-                                "isolation-level": "ReadCommitted",
-                                "pool-minsize": "2",
-                                "pool-maxsize": "250",
-                                "time-between-eviction-runs-millis": "600000"
-                            ]
-                        ],
-                        "localpostgrestenant": [
-                            "helper-class": "org.apache.ofbiz.entity.datasource.GenericHelperDAO",
-                            "schema-name": "ofbiz_tenant",
-                            "field-type-name": "postgres",
-                            "check-on-start": "true",
-                            "add-missing-on-start": "true",
-                            "use-fk-initially-deferred": "false",
-                            "alias-view-columns": "false",
-                            "join-style": "ansi",
-                            "use-binary-type-for-blob": "true",
-                            "use-order-by-nulls": "true",
-                            "offset-style": "limit",
-                            "result-fetch-size": "50",
-                            "read-data": [
-                                ["reader-name": "tenant"],
-                                ["reader-name": "seed"],
-                                ["reader-name": "seed-initial"],
-                                ["reader-name": "demo"],
-                                ["reader-name": "ext"],
-                                ["reader-name": "ext-test"],
-                                ["reader-name": "ext-demo"]
-                            ],
-                            "inline-jdbc": [
-                                "jdbc-driver": "org.postgresql.Driver",
-                                "jdbc-uri": "jdbc:postgresql://" + pgconfig.getHostname() + "/" + pgconfig.getDatabase(),
-                                "jdbc-username": pgconfig.getUsername(),
-                                "jdbc-password": pgconfig.getPassword(),
-                                "isolation-level": "ReadCommitted",
-                                "pool-minsize": "2",
-                                "pool-maxsize": "250",
-                                "time-between-eviction-runs-millis": "600000"
-                            ]
-                        ]
                     ]
-                ]
-            ]
-        ])
+            ])
 
-        var conf = builder.toPrettyString()
+            var conf = builder.toPrettyString()
 
-        FileWriter configWriter = new FileWriter("install/framework/entity/config/entityengine.conf");
-        configWriter.write(conf);
-        configWriter.close();
+            FileWriter configWriter = new FileWriter("install/framework/entity/config/entityengine.conf");
+            configWriter.write(conf);
+            configWriter.close();
 
-        File gradleFile = new File("install", "build.gradle");
+            File gradleFile = new File("install", "build.gradle");
 
-        String gradleFileContent = Files.readString(gradleFile.toPath())
+            String gradleFileContent = Files.readString(gradleFile.toPath())
 
-        String newGradleFileContent = gradleFileContent.replaceAll(
-                "\ndependencies \\{\\r?\\n(?! {4}implementation 'org\\.postgresql:postgresql:42\\.2\\.8')",
-                "\ndependencies {\n    implementation 'org.postgresql:postgresql:42.2.8'\n"
-        )
-        println(newGradleFileContent)
-        FileWriter gradleWriter = new FileWriter(gradleFile)
-        gradleWriter.write(newGradleFileContent)
-        gradleWriter.close()
+            String newGradleFileContent = gradleFileContent.replaceAll(
+                    "\ndependencies \\{\\r?\\n(?! {4}implementation 'org\\.postgresql:postgresql:42\\.2\\.8')",
+                    "\ndependencies {\n    implementation 'org.postgresql:postgresql:42.2.8'\n"
+            )
+
+            FileWriter gradleWriter = new FileWriter(gradleFile)
+            gradleWriter.write(newGradleFileContent)
+            gradleWriter.close()
+        }
 
         synchronized (this) {
             status = StepState.Status.COMPLETE
