@@ -4,7 +4,7 @@
             <div class="status-progress-bar">
                 <#if step.status == "SCHEDULED">
                 <#elseif step.status == "IN_PROGRESS">
-                    <#if step.progress == -1>
+                    <#if step.progress < 0>
                         <div class="status-progress-bar-value unknown"></div>
                     <#else>
                         <div class="status-progress-bar-value" style="width:${(step.progress * 100)?string(",##0")}%"></div>

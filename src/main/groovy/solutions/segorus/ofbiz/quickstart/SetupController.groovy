@@ -8,17 +8,22 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.servlet.view.RedirectView
 import solutions.segorus.ofbiz.quickstart.wizard.Wizard
+import solutions.segorus.ofbiz.quickstart.wizard.steps.data.DataSetupStep
+import solutions.segorus.ofbiz.quickstart.wizard.steps.database.DatabaseSetupStep
+import solutions.segorus.ofbiz.quickstart.wizard.steps.distribution.DistributionSelectionStep
+import solutions.segorus.ofbiz.quickstart.wizard.steps.plugins.PluginsSetupStep
+import solutions.segorus.ofbiz.quickstart.wizard.steps.user.UserSetupStep
 
 @Controller
 @RequestMapping("/")
 class SetupController {
 
-    private Wizard wizard;
+    private Wizard wizard
 
     @Autowired
     SetupController(Wizard wizard)
     {
-        this.wizard = wizard;
+        this.wizard = wizard
     }
 
     @GetMapping("/")
@@ -42,6 +47,11 @@ class SetupController {
     {
         model.put("steps", wizard.getSteps())
         model.put("currentStep", "/setup/summary")
+        model.put("summaryDistributionConfig", wizard.getStep(DistributionSelectionStep.class).getConfig())
+        model.put("summaryPluginsConfig", wizard.getStep(PluginsSetupStep.class).getConfig())
+        model.put("summaryDatabaseConfig", wizard.getStep(DatabaseSetupStep.class).getConfig())
+        model.put("summaryDataConfig", wizard.getStep(DataSetupStep.class).getConfig())
+        model.put("summaryUserConfig", wizard.getStep(UserSetupStep.class).getConfig())
         return "pages/setup/summary"
     }
 
@@ -65,6 +75,6 @@ class SetupController {
     RedirectView install(ModelMap model)
     {
         wizard.install()
-        return new RedirectView("/setup/install");
+        return new RedirectView("/setup/install")
     }
 }
