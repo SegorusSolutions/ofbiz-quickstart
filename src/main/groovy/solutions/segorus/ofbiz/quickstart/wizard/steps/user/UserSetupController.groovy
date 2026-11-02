@@ -41,15 +41,8 @@ class UserSetupController {
         model.put("steps", wizard.getSteps())
         UserSetupStep userSetupStep = wizard.getStep(UserSetupStep.class)
         UserSetupConfig config = new UserSetupConfig()
-//
-//        if (userFormData.getPassword() != userFormData.getConfirmPassword())
-//        {
-//            // Todo: set error message
-//            return new RedirectView("/setup/config/user");
-//        }
 
         config.setUsername(userFormData.getName())
-        config.setPassword(userFormData.getPassword())
 
         userSetupStep.setConfig(config)
         return new RedirectView("/setup/summary");

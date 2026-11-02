@@ -13,12 +13,12 @@ import solutions.segorus.ofbiz.quickstart.wizard.Wizard
 @RequestMapping("/setup/config/data")
 class DataSetupController {
 
-    private Wizard wizard;
+    private Wizard wizard
 
     @Autowired
     HomeController(Wizard wizard)
     {
-        this.wizard = wizard;
+        this.wizard = wizard
     }
 
     @GetMapping()

@@ -7,20 +7,7 @@ import solutions.segorus.ofbiz.quickstart.wizard.WizardStepApplier
 class PluginsSetupApplier implements WizardStepApplier<PluginsSetupConfig>{
 
     synchronized List<StepState> getStates() {
-        return new StepState[] {
-                new StepState(
-                        StepState.Status.SCHEDULED,
-                        "Download plugin *",
-                        "",
-                        0
-                ),
-                new StepState(
-                        StepState.Status.SCHEDULED,
-                        "Install plugin *",
-                        "",
-                        0
-                ),
-        }
+        return new StepState[] {}
     }
 
     void run(PluginsSetupConfig config) {

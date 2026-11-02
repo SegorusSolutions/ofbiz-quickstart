@@ -177,11 +177,11 @@ class DatabaseSetupApplier implements WizardStepApplier<DatabaseSetupConfig> {
 
             var conf = builder.toPrettyString()
 
-            FileWriter configWriter = new FileWriter("install/framework/entity/config/entityengine.conf");
-            configWriter.write(conf);
-            configWriter.close();
+            FileWriter configWriter = new FileWriter("install/framework/entity/config/entityengine.conf")
+            configWriter.write(conf)
+            configWriter.close()
 
-            File gradleFile = new File("install", "build.gradle");
+            File gradleFile = new File("install", "build.gradle")
 
             String gradleFileContent = Files.readString(gradleFile.toPath())
 
