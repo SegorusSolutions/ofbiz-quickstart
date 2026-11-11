@@ -1,5 +1,6 @@
 package solutions.segorus.ofbiz.quickstart.wizard.steps.distribution
 
+import org.apache.tomcat.util.http.fileupload.FileUtils
 import solutions.segorus.ofbiz.quickstart.CmdResult
 import solutions.segorus.ofbiz.quickstart.CommandUtils
 import solutions.segorus.ofbiz.quickstart.wizard.StepState
@@ -99,6 +100,8 @@ class DistributionSelectionApplier implements WizardStepApplier<DistributionSele
             }
 
             File destinationDir = new File("install");
+
+            FileUtils.cleanDirectory(destinationDir)
 
             byte[] buffer = new byte[1024];
             ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(downloadedFilePath));
