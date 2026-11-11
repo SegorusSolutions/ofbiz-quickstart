@@ -68,6 +68,7 @@ class SetupController {
     String status(ModelMap model)
     {
         model.addAttribute("stepStates", wizard.getStepStates())
+        model.addAttribute("complete", wizard.isComplete())
         return "fragments/setup/install-status"
     }
 
@@ -76,5 +77,27 @@ class SetupController {
     {
         wizard.install()
         return new RedirectView("/setup/install")
+    }
+
+    @PostMapping("/setup/start")
+    static RedirectView start(ModelMap model)
+    {
+        ProcessBuilder builder = new ProcessBuilder();
+
+        builder.directory(new File("install"))
+
+        String[] cmd = CommandUtils.isWindows() ? ["cmd.exe", "./gradlew.bat", "ofbiz"] : ["sh", "./gradlew", "ofbiz"]
+
+        builder.command(cmd);
+
+        builder.start()
+
+        return new RedirectView("/setup/run")
+    }
+
+    @GetMapping("/setup/run")
+    static String manageRunningInstance(ModelMap model)
+    {
+        return "pages/setup/run"
     }
 }

@@ -1,4 +1,36 @@
 <div class="status-box">
+
+    <form action="/setup/start" method="post">
+        <div class="card-option-container">
+            <#if complete>
+                <button type="submit" name="install" class="card-option">
+                    <div class="card-option-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 5v14a2 2 0 0 0 2.75 1.84L20 13.74a2 2 0 0 0 0-3.5L7.75 3.14A2 2 0 0 0 5 4.89" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div class="card-option-body">
+                        <div class="card-option-title">
+                            Start OFBIZ
+                        </div>
+                    </div>
+                </button>
+            <#else>
+                <div class="card-info">
+                    <div class="card-option-icon" style="background: #ff8822;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M6.5 7h11m-11 10h11M6 20v-2a6 6 0 1 1 12 0v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1"/><path d="M6 4v2a6 6 0 1 0 12 0V4a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1"/></g></svg>
+                    </div>
+                    <div class="card-option-body">
+                        <div class="card-option-title">
+                            Installation in progress
+                        </div>
+                        <div class="card-option-body">
+                            Please wait
+                        </div>
+                    </div>
+                </div>
+            </#if>
+        </div>
+    </form>
+
     <#list stepStates as step>
         <div class="status-item">
             <div class="status-progress-bar">
@@ -38,4 +70,5 @@
             </#if>
         </div>
     </#list>
+
 </div>

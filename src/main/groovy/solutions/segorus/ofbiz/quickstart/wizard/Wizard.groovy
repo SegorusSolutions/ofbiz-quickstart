@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 class Wizard {
     private LinkedHashMap<Class<WizardStep>, WizardStep> steps = new LinkedHashMap<>();
     private AtomicBoolean running = new AtomicBoolean(false);
+    private AtomicBoolean complete = new AtomicBoolean(false);
 
     Wizard(List<WizardStep> steps)
     {
@@ -33,9 +34,15 @@ class Wizard {
         return running
     }
 
+    boolean isComplete()
+    {
+        return complete
+    }
+
     void install()
     {
         AtomicBoolean r = this.running
+        AtomicBoolean c = this.complete
         r.set(true);
         var steps = getSteps()
         Runnable downloadThread = new Runnable() {
@@ -51,6 +58,7 @@ class Wizard {
                 }
                 finally {
                     r.set(false)
+                    c.set(true)
                 }
             }
         };
