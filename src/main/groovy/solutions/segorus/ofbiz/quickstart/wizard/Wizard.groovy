@@ -1,16 +1,15 @@
 package solutions.segorus.ofbiz.quickstart.wizard
 
 import solutions.segorus.ofbiz.quickstart.OfbizInstance
+import solutions.segorus.ofbiz.quickstart.wizard.steps.plugins.PluginsRepository
 
 import java.util.concurrent.atomic.AtomicBoolean
 
 class Wizard {
-    private LinkedHashMap<Class<WizardStep>, WizardStep> steps = new LinkedHashMap<>();
-    private AtomicBoolean running = new AtomicBoolean(false);
-    private AtomicBoolean complete = new AtomicBoolean(false);
     private LinkedHashMap<Class<WizardStep>, WizardStep> steps = new LinkedHashMap<>()
     private AtomicBoolean running = new AtomicBoolean(false)
     private AtomicBoolean complete = new AtomicBoolean(false)
+    private PluginsRepository pluginsRepository = new PluginsRepository()
     private OfbizInstance ofbizInstance = new OfbizInstance()
 
     Wizard(List<WizardStep> steps)
@@ -19,6 +18,10 @@ class Wizard {
         {
             this.steps.put(step.getClass(), step)
         }
+    }
+
+    PluginsRepository getPluginsRepository() {
+        return pluginsRepository
     }
 
     Collection<WizardStep> getSteps() {

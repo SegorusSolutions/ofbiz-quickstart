@@ -2,6 +2,7 @@ package solutions.segorus.ofbiz.quickstart.wizard.steps.user
 
 import solutions.segorus.ofbiz.quickstart.CmdResult
 import solutions.segorus.ofbiz.quickstart.CommandUtils
+import solutions.segorus.ofbiz.quickstart.OfbizInstance
 import solutions.segorus.ofbiz.quickstart.wizard.StepState
 import solutions.segorus.ofbiz.quickstart.wizard.WizardStepApplier
 
@@ -21,7 +22,7 @@ class UserSetupApplier implements WizardStepApplier<UserSetupConfig> {
         }
     }
 
-    void run(UserSetupConfig config) {
+    void run(UserSetupConfig config, OfbizInstance ofbizInstance) {
 
         synchronized (this) {
             status = StepState.Status.IN_PROGRESS

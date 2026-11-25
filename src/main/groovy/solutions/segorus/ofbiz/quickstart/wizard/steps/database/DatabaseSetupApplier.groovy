@@ -5,10 +5,6 @@ import solutions.segorus.ofbiz.quickstart.wizard.StepState
 import solutions.segorus.ofbiz.quickstart.wizard.WizardStepApplier
 import groovy.json.JsonBuilder
 
-import java.nio.file.Files
-import java.nio.file.Path
-import java.util.regex.Pattern
-
 class DatabaseSetupApplier implements WizardStepApplier<DatabaseSetupConfig> {
 
     private StepState.Status status = StepState.Status.SCHEDULED
@@ -87,7 +83,7 @@ class DatabaseSetupApplier implements WizardStepApplier<DatabaseSetupConfig> {
         // TODO: Move to an ofbiz component generator
         StringBuilder ofbizComponentBuilder = new StringBuilder()
         ofbizComponentBuilder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
-        ofbizComponentBuilder.append("<ofbiz-component name=\"QuickstartDbHelper\" enabled=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"https://ofbiz.apache.org/dtds/ofbiz-component.xsd\">")
+        ofbizComponentBuilder.append("<ofbiz-component name=\"quickstart-db-helper\" enabled=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"https://ofbiz.apache.org/dtds/ofbiz-component.xsd\">")
 
         ofbizComponentBuilder.append("    <resource-loader name=\"main\" type=\"component\"/>\n")
         ofbizComponentBuilder.append("    <classpath type=\"dir\" location=\"config\"/>\n")

@@ -347,3 +347,12 @@ input:read-only {
     display: flex;
     align-items: center;
 }
+
+.split-view {
+    display: flex;
+}
+
+.split-view>* {
+    flex-grow: 1;
+    flex-basis: 50%;
+}

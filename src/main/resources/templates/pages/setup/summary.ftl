@@ -19,19 +19,39 @@
                     </div>
                 </div>
             </div>
-            <div class="card-info">
-                <div class="card-option-icon" <#if !summaryPluginsConfig??>style="background: #ff8822;"</#if>>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h3a1 1 0 0 0 1-1V5a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1v-1a2 2 0 0 0-4 0v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a2 2 0 0 0 0-4H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1"/></svg>
-                </div>
-                <div class="card-option-body">
-                    <div class="card-option-title">
-                        Selected plugins
+            <#if !summaryPluginsConfig??>
+                <div class="card-info">
+                    <div class="card-option-icon" style="background: #ff8822;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h3a1 1 0 0 0 1-1V5a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1v-1a2 2 0 0 0-4 0v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a2 2 0 0 0 0-4H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1"/></svg>
                     </div>
-                    <div class="card-option-content">
-                        No plugins selected
+                    <div class="card-option-body">
+                        <div class="card-option-title">
+                            Selected plugins
+                        </div>
+                        <div class="card-option-content">
+                            No plugins selected
+                        </div>
                     </div>
                 </div>
-            </div>
+            <#else>
+                <div class="card-info">
+                    <div class="card-option-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h3a1 1 0 0 0 1-1V5a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1v-1a2 2 0 0 0-4 0v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a2 2 0 0 0 0-4H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1"/></svg>
+                    </div>
+                    <div class="card-option-body">
+                        <div class="card-option-title">
+                            Selected plugins
+                        </div>
+                        <div class="card-option-content">
+                            <#list summaryPluginsConfig.plugins as plugin>
+                                ${plugin.name} (${plugin.id}) <br>
+                            <#else>
+                                No plugins selected
+                            </#list>
+                        </div>
+                    </div>
+                </div>
+            </#if>
             <div class="card-info">
                 <div class="card-option-icon" <#if !summaryDatabaseConfig??>style="background: #ff8822;"</#if>>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M4 6a8 3 0 1 0 16 0A8 3 0 1 0 4 6"/><path d="M4 6v6a8 3 0 0 0 16 0V6"/><path d="M4 12v6a8 3 0 0 0 16 0v-6"/></g></svg>
