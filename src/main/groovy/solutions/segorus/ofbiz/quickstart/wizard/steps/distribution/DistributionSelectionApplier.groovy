@@ -3,6 +3,7 @@ package solutions.segorus.ofbiz.quickstart.wizard.steps.distribution
 import org.apache.tomcat.util.http.fileupload.FileUtils
 import solutions.segorus.ofbiz.quickstart.CmdResult
 import solutions.segorus.ofbiz.quickstart.CommandUtils
+import solutions.segorus.ofbiz.quickstart.OfbizInstance
 import solutions.segorus.ofbiz.quickstart.wizard.StepState
 import solutions.segorus.ofbiz.quickstart.wizard.WizardStepApplier
 
@@ -48,7 +49,7 @@ class DistributionSelectionApplier implements WizardStepApplier<DistributionSele
         }
     }
 
-    void run(DistributionSelectionConfig config)
+    void run(DistributionSelectionConfig config, OfbizInstance ofbizInstance)
     {
         try {
             synchronized (this) {
@@ -77,7 +78,6 @@ class DistributionSelectionApplier implements WizardStepApplier<DistributionSele
 
                 synchronized (this) {
                     downloadProgress = ((double) downloadedFileSize) / ((double) completeFileSize);
-                    println(downloadProgress)
                 }
 
                 bufferedOutputStream.write(data, 0, x);
@@ -99,7 +99,7 @@ class DistributionSelectionApplier implements WizardStepApplier<DistributionSele
                 extractDetails = "Extracting packages ..."
             }
 
-            File destinationDir = new File("install");
+            File destinationDir = ofbizInstance.getInstallDir();
 
             FileUtils.cleanDirectory(destinationDir)
 
@@ -156,13 +156,6 @@ class DistributionSelectionApplier implements WizardStepApplier<DistributionSele
                 gradleWrapperStatus = StepState.Status.IN_PROGRESS
                 gradleWrapperProgress = -1
             }
-
-            String overloadConf = "\nofbiz.config.overload.enable=true"
-            Files.write(
-                    Paths.get("install/framework/start/src/main/resources/org/apache/ofbiz/base/start/start.properties"),
-                    overloadConf.getBytes(),
-                    StandardOpenOption.APPEND
-            );
 
             if (CommandUtils.isWindows())
             {

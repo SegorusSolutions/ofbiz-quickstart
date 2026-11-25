@@ -1,5 +1,6 @@
 package solutions.segorus.ofbiz.quickstart.wizard
 
+import solutions.segorus.ofbiz.quickstart.OfbizInstance
 
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -7,6 +8,10 @@ class Wizard {
     private LinkedHashMap<Class<WizardStep>, WizardStep> steps = new LinkedHashMap<>();
     private AtomicBoolean running = new AtomicBoolean(false);
     private AtomicBoolean complete = new AtomicBoolean(false);
+    private LinkedHashMap<Class<WizardStep>, WizardStep> steps = new LinkedHashMap<>()
+    private AtomicBoolean running = new AtomicBoolean(false)
+    private AtomicBoolean complete = new AtomicBoolean(false)
+    private OfbizInstance ofbizInstance = new OfbizInstance()
 
     Wizard(List<WizardStep> steps)
     {
@@ -50,7 +55,7 @@ class Wizard {
                 try {
                     for (step in steps)
                     {
-                        step.getRunner().run(step.getConfig())
+                        step.getRunner().run(step.getConfig(), ofbizInstance)
                     }
                 }
                 catch (Exception e) {
@@ -63,5 +68,9 @@ class Wizard {
             }
         };
         new Thread(downloadThread).start();
+    }
+
+    OfbizInstance getOfbizInstance() {
+        return ofbizInstance
     }
 }

@@ -1,5 +1,6 @@
 package solutions.segorus.ofbiz.quickstart.wizard.steps.database
 
+import solutions.segorus.ofbiz.quickstart.OfbizInstance
 import solutions.segorus.ofbiz.quickstart.wizard.StepState
 import solutions.segorus.ofbiz.quickstart.wizard.WizardStepApplier
 import groovy.json.JsonBuilder
@@ -36,7 +37,7 @@ class DatabaseSetupApplier implements WizardStepApplier<DatabaseSetupConfig> {
     }
 
     @Override
-    void run(DatabaseSetupConfig config) {
+    void run(DatabaseSetupConfig config, OfbizInstance ofbizInstance) {
         synchronized (this) {
             status = StepState.Status.IN_PROGRESS
             progress = -1
@@ -45,7 +46,7 @@ class DatabaseSetupApplier implements WizardStepApplier<DatabaseSetupConfig> {
 
         if (config.class == DatabaseSetupPostgresConfig)
         {
-            generateHelperPlugin(config)
+            generateHelperPlugin(config, ofbizInstance)
         }
 
         synchronized (this) {
@@ -55,16 +56,11 @@ class DatabaseSetupApplier implements WizardStepApplier<DatabaseSetupConfig> {
         }
     }
 
-    private static generateHelperPlugin(DatabaseSetupConfig config)
+    private static generateHelperPlugin(DatabaseSetupConfig config, OfbizInstance ofbizInstance)
     {
         // -- Make paths --
 
-        // TODO: Move to an ofbiz instance class
-        File installDir = new File("install")
-        File pluginsDir = new File(installDir, "plugins")
-        //
-
-        File dbHelperPluginDir = new File(pluginsDir, "QuickstartDbHelper")
+        File dbHelperPluginDir = new File(ofbizInstance.pluginsDir, "solutions.segorus.ofbiz.plugin.quickstart-db-helper")
         File dbHelperConfigDir = new File(dbHelperPluginDir, "config")
         dbHelperPluginDir.mkdirs()
         dbHelperConfigDir.mkdirs()

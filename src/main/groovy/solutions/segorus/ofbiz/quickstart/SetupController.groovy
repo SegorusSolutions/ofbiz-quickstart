@@ -80,17 +80,9 @@ class SetupController {
     }
 
     @PostMapping("/setup/start")
-    static RedirectView start(ModelMap model)
+    RedirectView start(ModelMap model)
     {
-        ProcessBuilder builder = new ProcessBuilder();
-
-        builder.directory(new File("install"))
-
-        String[] cmd = CommandUtils.isWindows() ? ["cmd.exe", "./gradlew.bat", "ofbiz"] : ["sh", "./gradlew", "ofbiz"]
-
-        builder.command(cmd);
-
-        builder.start()
+        wizard.getOfbizInstance().start()
 
         return new RedirectView("/setup/run")
     }

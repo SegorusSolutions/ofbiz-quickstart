@@ -12,6 +12,7 @@ class PluginsSetupApplier implements WizardStepApplier<PluginsSetupConfig>{
 
     void run(PluginsSetupConfig config) {
 
+    void run(PluginsSetupConfig config, OfbizInstance ofbizInstance) {
     }
 
 }

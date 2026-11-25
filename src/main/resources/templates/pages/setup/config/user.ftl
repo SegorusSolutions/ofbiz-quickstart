@@ -5,10 +5,6 @@
         <form action="/setup/config/user" method="post">
             <div>Name:</div>
             <input type="text" name="name" value="${(user.name)!""}"/>
-<#--            <br/><br/>-->
-<#--            <div>Password:</div>-->
-<#--            <input type="password" name="password"/>-->
-<#--            <input type="password" name="confirmPassword"/>-->
             <br/><br/>
 
             <div class="card-option-container">
